@@ -1,0 +1,21 @@
+version: "3.7" 
+services:
+  php:
+    command: php -S 0.0.0.0:9000 -t src/public/
+    build: .
+    ports:
+    - "9000:9000"
+    volumes:
+    - .:/var/www/html
+    depends_on:
+      - database_dev
+  database_dev:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db_core
+    volumes:
+      - ./configs/database/pgdata_dev:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
