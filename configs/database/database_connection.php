@@ -12,7 +12,7 @@
   } catch (PDOException $e) {
     die($e->getMessage());
   } finally {
-    if ($pdo) {
+    if (!$pdo) {
       $pdo = null;
     }
   }
